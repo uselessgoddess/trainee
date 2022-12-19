@@ -1,6 +1,9 @@
-BasedOnStyle:  Google
-ColumnLimit : 100
+BasedOnStyle: Google
+ColumnLimit: 100
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortLambdasOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
+
+PointerAlignment: Left
+ReferenceAlignment: Left
