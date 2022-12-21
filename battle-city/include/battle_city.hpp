@@ -6,4 +6,6 @@
 #include "surface.h"
 #include "tank.h"
 
+#include "message.h"
+
 #undef TODO
