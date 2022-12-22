@@ -13,9 +13,8 @@ struct deserialize {
 
 // it can be simplified?
 template <typename Self>
-concept deserialized = noexport::pure<Self> && requires(std::string_view str) {
-                                                 deserialize<std::remove_cvref_t<Self>>{}(str);
-                                               };
+concept deserialized =
+    noexport::pure<Self> && requires(std::string_view str) { deserialize<Self>{}(str); };
 
 template <deserialized Self>
 /* result is more idiomatic -- it `std::optional` + error type */

@@ -15,8 +15,7 @@ struct serialize {
 
 // it can be simplified?
 template <typename Self>
-concept serialized =
-    noexport::pure<Self> && requires(Self self) { serialize<std::remove_cvref_t<Self>>{}(self); };
+concept serialized = requires(Self self) { serialize<std::remove_cvref_t<Self>>{}(self); };
 
 auto to_string(serialized auto&& self) -> std::string {
   constexpr auto ser = serialize<std::remove_cvref_t<decltype(self)>>{};
@@ -26,7 +25,7 @@ auto to_string(serialized auto&& self) -> std::string {
 template <std::integral Self>
 struct serialize<Self> {
   // signature
-  auto operator()(const Self& self) const -> std::string {
+  auto operator()(const Self& self) const noexcept -> std::string {
     std::string buf(sizeof(Self), '\0');
     std::memcpy(&buf[0], &self, sizeof(Self));
     return buf;

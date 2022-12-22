@@ -25,6 +25,20 @@ struct serialize<either<T, U>> {
 };
 }  // namespace ser
 
+namespace de {
+template <deserialized T, deserialized U>
+struct deserialize<either<T, U>> {
+  // signature
+  auto operator()(std::string_view str) const -> std::pair<either<T, U>, std::string_view> {
+    if (str.at(0) == '\0') {
+      return from_str<T>(str.substr(1));
+    } else {
+      return from_str<U>(str.substr(1));
+    }
+  }
+};
+}  // namespace de
+
 /*
  for example, it is invalid enum:
  ```
